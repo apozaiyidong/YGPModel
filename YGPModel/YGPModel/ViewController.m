@@ -29,13 +29,14 @@
     [[YGPHTTPRequest sharedRequest]GET:url params:params success:^(NSURLRequest *urlRequest, id responseData) {
         NSLog(@"%@",responseData[@"data"]);
         
-        TestModel * test = [[TestModel alloc]initWithDictionary:responseData];
+        TestModel * test = [[TestModel alloc]initWithDictionary:responseData[@"data"]];
 //        NSLog(@"data--- %@",test.data);
-        [test setDictionary:test.data[0]];
-        NSLog(@"%@",test.learner);
+//        [test setDictionary:test.data[0]];
+//        NSLog(@"%@",test.learner);
         
 //        NSLog(@"%@ -- %@",test.picSmall,test.name);
-        [imageView YGP_setImageWithURL:test.picSmall];
+        
+        [imageView YGP_setImageWithURL:nil];
     } failure:^(NSURLRequest *urlRequest, NSError *error) {
         
     }];

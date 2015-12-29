@@ -18,34 +18,24 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary{
 
-    if (!dictionary || [dictionary isKindOfClass:[NSNull class]]) {
-        NSLog(@"dictionary is nil");
-        return nil;
-    }
-    
-    if (![dictionary isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"dictionary ! [NSDictionary class]");
-        return nil;
-    }
-    
+
     if (self = [super init]) {
         propertyAttributes = [[NSMutableArray alloc]init];
-
-        [self adpterValueWithDictionary:dictionary];
+        [self setDictionary:dictionary];
     }
     
     return self;
 }
 
 - (void)setDictionary:(NSDictionary *)dictionary{
-    NSLog(@"dictionary %@",dictionary);
+    
     if (!dictionary || [dictionary isKindOfClass:[NSNull class]]) {
         NSLog(@"dictionary is nil");
         return;
     }
     
     if (![dictionary isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"dictionary ! [NSDictionary class]");
+        NSLog(@"dictionary != [NSDictionary class]");
         return;
     }
     

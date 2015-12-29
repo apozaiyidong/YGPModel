@@ -42,6 +42,12 @@
                    progress:(YGPWebImageDownloaderProgressBlock)progres
                    complete:(YGPWebImageDownLoadComplete)complete{
     
+    if (!url) {
+        NSLog(@"******YGPWebImage URL is nil");
+        return;
+    }
+    
+    
     [self setImageURL:url];
     
     if (placeholder) {
