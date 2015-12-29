@@ -13,5 +13,6 @@
 @property (nonatomic,strong)NSURL *picSmall;
 @property (nonatomic,copy)NSString *name;
 @property (nonatomic,copy)NSArray  *data;
+@property (nonatomic,strong)NSNumber *learner;
 
 @end

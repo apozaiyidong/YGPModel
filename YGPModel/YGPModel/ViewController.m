@@ -27,11 +27,12 @@
 //    [imageView YGP_setImageWithURL:[NSURL URLWithString:@"http://img.mukewang.com/55237dcc0001128c06000338-300-170.jpg"]];
     
     [[YGPHTTPRequest sharedRequest]GET:url params:params success:^(NSURLRequest *urlRequest, id responseData) {
-//        NSLog(@"%@",responseData[@"data"]);
+        NSLog(@"%@",responseData[@"data"]);
         
         TestModel * test = [[TestModel alloc]initWithDictionary:responseData];
 //        NSLog(@"data--- %@",test.data);
         [test setDictionary:test.data[0]];
+        NSLog(@"%@",test.learner);
         
 //        NSLog(@"%@ -- %@",test.picSmall,test.name);
         [imageView YGP_setImageWithURL:test.picSmall];
