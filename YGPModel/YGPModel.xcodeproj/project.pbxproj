@@ -558,6 +558,7 @@
 				184482261C322D27001E8F30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		184482271C322D27001E8F30 /* Build configuration list for PBXNativeTarget "YGPModelTests" */ = {
 			isa = XCConfigurationList;
@@ -566,6 +567,7 @@
 				184482291C322D27001E8F30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1844822A1C322D27001E8F30 /* Build configuration list for PBXNativeTarget "YGPModelUITests" */ = {
 			isa = XCConfigurationList;
@@ -574,6 +576,7 @@
 				1844822C1C322D27001E8F30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

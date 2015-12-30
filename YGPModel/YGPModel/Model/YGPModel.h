@@ -1,21 +1,19 @@
-//
-//  YGPModel.h
-//  YGPModel
-//
-//  Created by apple on 15/12/29.
-//  Copyright © 2015年 apozaiyidong. All rights reserved.
-//
+/*
+ 
+ https://github.com/apozaiyidong/YGPModel
+ 
+ apozaiyidong 286677411 
+ */
 
 #import <Foundation/Foundation.h>
 
 @interface YGPModel : NSObject
 
 - (id)initWithDictionary:(NSDictionary*)dictionary;
-- (void)setDictionary:(NSDictionary *)dictionary;
+- (void)mappingWithDictionary:(NSDictionary *)dictionary;
 
 @end
+
 @interface NSString (property_Attributes)
-
 - (BOOL)contains:(NSString*)att;
-
 @end
