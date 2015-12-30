@@ -67,6 +67,14 @@
 
 - (void)adpterValue:(id)value forKey:(NSString*)key propertyAtts:(NSString*)propertyAtts{
     
+    if ([value isKindOfClass:[NSNumber class]]) {
+        NSLog(@"value %@",value);
+    }else if([value isKindOfClass:[NSValue class]]){
+        NSLog(@"value %@",value);
+    
+    }
+    
+    
     if ([propertyAtts contains:@"NSURL"]) {
         
         if ([value isKindOfClass:[NSString class]]) {
@@ -74,7 +82,27 @@
                 [self setValue:url forKey:key];
                     return;
         }//NSURL
+        else if ([propertyAtts contains:@"NSDate"]){
+            
+            if ([value isKindOfClass:[NSDate class]]) {
+                
+            }
+            
+        }//NSDate
+        else if ([propertyAtts contains:@"Array"]){
         
+            if (![value isKindOfClass:[NSArray class]]) {
+                NSLog(@"YGPModel Error: %@ type != %@ ",key,value);
+            }
+            
+        }//Array
+        else if ([propertyAtts contains:@"Dictionary"]){
+            
+            if (![value isKindOfClass:[NSDictionary class]]) {
+                NSLog(@"YGPModel Error: %@ type !=  %@ ",key,value);
+            }
+            
+        }//NSDictionary
     }
             
     [self setValue:value forKey:key];
@@ -99,10 +127,22 @@
     
     for (int i = 0; i<count; i++)
     {
+        
+        //property_getAttributes
+        const char *attrs = property_getAttributes(properties[i]);
+        NSString *property_getAttributesStr = [NSString stringWithCString:attrs encoding:NSASCIIStringEncoding];
+        NSLog(@"%s",attrs);
+        //不处理只读操作的属性
+        if ([property_getAttributesStr contains:@"R"]) {
+            continue;
+        }
+        
+        [propertyAttributes addObject:property_getAttributesStr];
+        
         const char* propertyName =property_getName(properties[i]);
         [array addObject: [NSString stringWithUTF8String:propertyName]];
-        const char *attrs = property_getAttributes(properties[i]);
-        [propertyAttributes addObject:[NSString stringWithCString:attrs encoding:NSASCIIStringEncoding]];
+        
+        
     }
     
     free(properties);

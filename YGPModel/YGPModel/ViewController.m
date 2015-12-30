@@ -25,11 +25,15 @@
     UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 50, 100, 100)];
     [self.view addSubview:imageView];
 //    [imageView YGP_setImageWithURL:[NSURL URLWithString:@"http://img.mukewang.com/55237dcc0001128c06000338-300-170.jpg"]];
-    
+    NSLog(@"--- %@",[NSString stringWithUTF8String:@encode(int)]);
+    NSLog(@"--- %@",[NSString stringWithUTF8String:@encode(CGPoint)]);
+
     [[YGPHTTPRequest sharedRequest]GET:url params:params success:^(NSURLRequest *urlRequest, id responseData) {
-        NSLog(@"%@",responseData[@"data"]);
+//        NSLog(@"%@",responseData[@"data"]);
         
-        TestModel * test = [[TestModel alloc]initWithDictionary:responseData[@"data"]];
+        NSDictionary *dict = @{@"cc":@(11),@"pp":[NSValue valueWithCGPoint:CGPointMake(20, 20)]};
+        
+        TestModel * test = [[TestModel alloc]initWithDictionary:dict];
 //        NSLog(@"data--- %@",test.data);
 //        [test setDictionary:test.data[0]];
 //        NSLog(@"%@",test.learner);
