@@ -33,11 +33,11 @@ static NSString *const YGPRequestHTTPMethodPOST = @"POST";
 }
 #pragma mark Request Method
 
-- (void)downLoadTaskURL:(NSURL*)url progress:(YGPWebImageDownloaderProgressBlock)progres
+- (void)downLoadTaskURL:(NSURL*)url progress:(YGPWebImageDownloaderProgressBlock)progress
                complete:(YGPWebImageDownloadeCompleteBlock)complete{
    
     _webImageDownloadeCompleteBlock  = complete;
-    _webImageDownloaderProgressBlock = progres;
+    _webImageDownloaderProgressBlock = progress;
     
     self.request      = [NSURLRequest requestWithURL:url];
     self.downLoadTask = [self.session downloadTaskWithRequest:_request];

@@ -36,7 +36,7 @@ webImageDownloadeCompleteBlock;
     failure:(YGPRequestFailureBlock)failure;
 
 - (void)downLoadTaskURL:(NSURL*)url
-               progress:(YGPWebImageDownloaderProgressBlock)progres
+               progress:(YGPWebImageDownloaderProgressBlock)progress
                complete:(YGPWebImageDownloadeCompleteBlock)complete;
 - (void)cancel;
 @end
