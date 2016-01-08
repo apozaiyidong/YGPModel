@@ -22,8 +22,8 @@
 @implementation YGPModel
 
 - (id)initWithDictionary:(NSDictionary *)dictionary{
-
-
+    
+    
     if (self = [super init]) {
         propertyAttributes = [[NSMutableArray alloc]init];
         [self mappingWithDictionary:dictionary];
@@ -45,7 +45,7 @@
     }
     
     [self mappingValueWithDictionary:dictionary];
-
+    
 }
 
 - (void)mappingValueWithDictionary:(NSDictionary*)dictionary{
@@ -59,12 +59,7 @@
         NSString *key   = propertyNames[i];
         id        value = dictionary[key];
         
-        if ([self isNull:value]){
-            [self setValue:nil forKey:key];
-            continue;
-        }
-        
-       [self adpterValue:value forKey:key propertyAtts:propertyAttributes[i]];
+        [self adpterValue:value forKey:key propertyAtts:propertyAttributes[i]];
         
     }
 }
@@ -74,6 +69,16 @@
     NSDictionary *underlyingDataTypes = [self underlyingDataTypes];
     Class cls = [self className_Property:propertyAtts underlyingTypes:underlyingDataTypes];
     
+    if ([self isNull:value]){
+        NSLog(@"%@  没有设置 value",key);
+        if ([cls isSubclassOfClass:[NSNumber class]]) {
+            [self setValue:@0 forKey:key];
+        }else{
+            [self setValue:nil forKey:key];
+        }
+        return;
+    }
+    
     //类型匹配直接赋值
     if ([value isKindOfClass:[cls class]]) {
         [self setValue:value forKey:key];
@@ -82,10 +87,10 @@
     
     if ([propertyAtts contains:@"NSURL"]) {
         if ([value isKindOfClass:[NSString class]]) {
-
+            
             NSURL *url = [NSURL URLWithString:value];
             [self setValue:url forKey:key];
-
+            
             return;
         }
     }//NSURL
@@ -107,7 +112,7 @@
             
             return;
         }
-    
+        
     }//NSArray
     else if ([propertyAtts contains:@"Dictionary"]){
         
@@ -118,6 +123,7 @@
             return;
         }
     }//NSDictionary
+    
     
     [self setValue:nil forKey:key];
 }
@@ -145,7 +151,7 @@
         //property_getAttributes
         const char *attrs = property_getAttributes(properties[i]);
         NSString *property_getAttributesStr = [NSString stringWithCString:attrs encoding:NSASCIIStringEncoding];
-       
+        
         //不处理只读操作的属性
         NSArray  *p  = [property_getAttributesStr componentsSeparatedByString:@","];
         NSString *rw = p[1];
@@ -202,7 +208,7 @@
     NSString *valueClass  = NSStringFromClass([NSValue class]);
     
     NSMutableDictionary *classNamesDictionary = [[NSMutableDictionary alloc]init];
-
+    
     [classNamesDictionary setObject:numberClass forKey:[NSString stringWithUTF8String:@encode(int)]];
     [classNamesDictionary setObject:numberClass forKey:[NSString stringWithUTF8String:@encode(BOOL)]];
     [classNamesDictionary setObject:numberClass forKey:[NSString stringWithUTF8String:@encode(long)]];
@@ -221,7 +227,7 @@
     [classNamesDictionary setObject:valueClass forKey:[NSString stringWithUTF8String:@encode(CGSize)]];
     [classNamesDictionary setObject:valueClass forKey:[NSString stringWithUTF8String:@encode(CGRect)]];
     [classNamesDictionary setObject:valueClass forKey:[NSString stringWithUTF8String:@encode(NSRange)]];
-
+    
     return classNamesDictionary;
 }
 
@@ -239,7 +245,7 @@
 @implementation NSString(property_Attributes)
 
 - (BOOL)contains:(NSString*)att{
-
+    
     NSRange range = [self rangeOfString:att options:NSCaseInsensitiveSearch];
     return (range.length == att.length &&range.location !=NSNotFound);
 }
