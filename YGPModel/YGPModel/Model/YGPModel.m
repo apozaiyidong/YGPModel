@@ -209,6 +209,8 @@
     
     NSMutableDictionary *classNamesDictionary = [[NSMutableDictionary alloc]init];
     
+    //转换成 C char* 便于和property_Attributes 做匹配
+    
     [classNamesDictionary setObject:numberClass forKey:[NSString stringWithUTF8String:@encode(int)]];
     [classNamesDictionary setObject:numberClass forKey:[NSString stringWithUTF8String:@encode(BOOL)]];
     [classNamesDictionary setObject:numberClass forKey:[NSString stringWithUTF8String:@encode(long)]];

@@ -63,7 +63,6 @@
 		184482331C322D38001E8F30 /* YGPURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPURLSessionManager.m; sourceTree = "<group>"; };
 		184482381C322D86001E8F30 /* YGPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGPModel.h; sourceTree = "<group>"; };
 		184482391C322D86001E8F30 /* YGPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPModel.m; sourceTree = "<group>"; };
-		1844823B1C325FAB001E8F30 /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
 		1844823C1C325FAB001E8F30 /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
 		184482531C326A11001E8F30 /* UIImageView+YGPWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YGPWebImage.h"; sourceTree = "<group>"; };
 		184482541C326A11001E8F30 /* UIImageView+YGPWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YGPWebImage.m"; sourceTree = "<group>"; };
@@ -131,7 +130,6 @@
 				184482081C322D27001E8F30 /* LaunchScreen.storyboard */,
 				1844820B1C322D27001E8F30 /* Info.plist */,
 				184481FA1C322D27001E8F30 /* Supporting Files */,
-				1844823B1C325FAB001E8F30 /* TestModel.h */,
 				1844823C1C325FAB001E8F30 /* TestModel.m */,
 			);
 			path = YGPModel;
