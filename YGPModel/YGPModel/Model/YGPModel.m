@@ -5,9 +5,7 @@
  将 NSDictionary 数据 Mapping 到 @property
  将 C 数据类型转换成 NSNumber
  
- 
- apozaiyidong 286677411
- */
+*/
 
 #import "YGPModel.h"
 #import <UIKit/UIKit.h>
@@ -156,7 +154,7 @@
         NSArray  *p  = [property_getAttributesStr componentsSeparatedByString:@","];
         NSString *rw = p[1];
         
-        if ([rw contains:@"R"]) {
+        if ([rw contains:@"R"]) {//只读
             continue;
         }
         

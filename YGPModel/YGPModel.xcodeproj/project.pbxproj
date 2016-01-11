@@ -18,7 +18,6 @@
 		184482351C322D38001E8F30 /* YGPHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482311C322D38001E8F30 /* YGPHTTPRequest.m */; };
 		184482361C322D38001E8F30 /* YGPURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482331C322D38001E8F30 /* YGPURLSessionManager.m */; };
 		1844823A1C322D86001E8F30 /* YGPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482391C322D86001E8F30 /* YGPModel.m */; };
-		1844823D1C325FAB001E8F30 /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844823C1C325FAB001E8F30 /* TestModel.m */; };
 		184482551C326A11001E8F30 /* UIImageView+YGPWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482541C326A11001E8F30 /* UIImageView+YGPWebImage.m */; };
 		184482591C326A1E001E8F30 /* YGPCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482581C326A1E001E8F30 /* YGPCache.m */; };
 /* End PBXBuildFile section */
@@ -63,7 +62,6 @@
 		184482331C322D38001E8F30 /* YGPURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPURLSessionManager.m; sourceTree = "<group>"; };
 		184482381C322D86001E8F30 /* YGPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGPModel.h; sourceTree = "<group>"; };
 		184482391C322D86001E8F30 /* YGPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPModel.m; sourceTree = "<group>"; };
-		1844823C1C325FAB001E8F30 /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
 		184482531C326A11001E8F30 /* UIImageView+YGPWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YGPWebImage.h"; sourceTree = "<group>"; };
 		184482541C326A11001E8F30 /* UIImageView+YGPWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YGPWebImage.m"; sourceTree = "<group>"; };
 		184482571C326A1E001E8F30 /* YGPCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGPCache.h; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				184482081C322D27001E8F30 /* LaunchScreen.storyboard */,
 				1844820B1C322D27001E8F30 /* Info.plist */,
 				184481FA1C322D27001E8F30 /* Supporting Files */,
-				1844823C1C325FAB001E8F30 /* TestModel.m */,
 			);
 			path = YGPModel;
 			sourceTree = "<group>";
@@ -329,7 +326,6 @@
 				184482591C326A1E001E8F30 /* YGPCache.m in Sources */,
 				184482551C326A11001E8F30 /* UIImageView+YGPWebImage.m in Sources */,
 				184481FF1C322D27001E8F30 /* AppDelegate.m in Sources */,
-				1844823D1C325FAB001E8F30 /* TestModel.m in Sources */,
 				184481FC1C322D27001E8F30 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
