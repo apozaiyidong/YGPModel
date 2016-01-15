@@ -6,9 +6,10 @@
 
 #import "ViewController.h"
 #import "YGPHTTPRequest.h"
-#import "TestModel.h"
 #import "UIImageView+YGPWebImage.h"
 #import <objc/runtime.h>
+#import "YGPCache/YGPCache.h"
+
 @interface ViewController ()
 
 @end
@@ -22,8 +23,13 @@
 //    
 //    TestModel * test = [[TestModel alloc]initWithDictionary:dict];
 //    NSLog(@"data--- %@ %@",test.arr,NSStringFromCGPoint(test.pp));
+    
+    for (int i = 0; i<36; i++) {
+        NSString *ac = [@(arc4random()%2000) stringValue];
+        [[YGPCache sharedCache]setObjectToMemory:ac forKey:[@(i) stringValue]];
 
-
+    }
+   
     
 }
 

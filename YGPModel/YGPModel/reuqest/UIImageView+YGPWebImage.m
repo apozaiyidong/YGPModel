@@ -57,8 +57,8 @@
     }
     
     __weak typeof(self) wSelf = self;
-
-    [[YGPCache sharedManager]dataFromDiskForKey:[url absoluteString] block:^(NSData *data, NSString *key) {
+    [[YGPCache sharedCache]dataForKey:[url absoluteString] block:^(NSData *data, NSString *key) {
+        
         __strong typeof(wSelf) sSelf = wSelf;
 
         if (data) {
@@ -94,13 +94,13 @@
                     
                     switch (cacheOperation) {
                         case YGPImageCacheMemory:
-                        
-                            [[YGPCache sharedManager] setDataToMemoryWithData:data forKey:[[self YGP_imageURL] absoluteString]];
+                           
+                            [[YGPCache sharedCache] setDataToMemoryWithData:data forKey:[[self YGP_imageURL] absoluteString]];
                         
                             break;
                         case YGPImageCacheDisk:
                             
-                            [[YGPCache sharedManager]setDataToDiskWithData:data forKey:[[self YGP_imageURL] absoluteString]];
+                            [[YGPCache sharedCache]setDataToDiskWithData:data forKey:[[self YGP_imageURL] absoluteString]];
                             
                             break;
                         default:

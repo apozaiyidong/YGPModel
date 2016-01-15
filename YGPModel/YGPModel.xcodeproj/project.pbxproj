@@ -19,7 +19,9 @@
 		184482361C322D38001E8F30 /* YGPURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482331C322D38001E8F30 /* YGPURLSessionManager.m */; };
 		1844823A1C322D86001E8F30 /* YGPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482391C322D86001E8F30 /* YGPModel.m */; };
 		184482551C326A11001E8F30 /* UIImageView+YGPWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482541C326A11001E8F30 /* UIImageView+YGPWebImage.m */; };
-		184482591C326A1E001E8F30 /* YGPCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 184482581C326A1E001E8F30 /* YGPCache.m */; };
+		18D616591C45EEDB00F1CF42 /* YGPCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D616541C45EEDB00F1CF42 /* YGPCache.m */; };
+		18D6165A1C45EEDB00F1CF42 /* YGPCacheDisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D616561C45EEDB00F1CF42 /* YGPCacheDisk.m */; };
+		18D6165B1C45EEDB00F1CF42 /* YGPCacheMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D616581C45EEDB00F1CF42 /* YGPCacheMemory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,8 +66,12 @@
 		184482391C322D86001E8F30 /* YGPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPModel.m; sourceTree = "<group>"; };
 		184482531C326A11001E8F30 /* UIImageView+YGPWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YGPWebImage.h"; sourceTree = "<group>"; };
 		184482541C326A11001E8F30 /* UIImageView+YGPWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YGPWebImage.m"; sourceTree = "<group>"; };
-		184482571C326A1E001E8F30 /* YGPCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGPCache.h; sourceTree = "<group>"; };
-		184482581C326A1E001E8F30 /* YGPCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPCache.m; sourceTree = "<group>"; };
+		18D616531C45EEDB00F1CF42 /* YGPCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGPCache.h; sourceTree = "<group>"; };
+		18D616541C45EEDB00F1CF42 /* YGPCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPCache.m; sourceTree = "<group>"; };
+		18D616551C45EEDB00F1CF42 /* YGPCacheDisk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGPCacheDisk.h; sourceTree = "<group>"; };
+		18D616561C45EEDB00F1CF42 /* YGPCacheDisk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPCacheDisk.m; sourceTree = "<group>"; };
+		18D616571C45EEDB00F1CF42 /* YGPCacheMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGPCacheMemory.h; sourceTree = "<group>"; };
+		18D616581C45EEDB00F1CF42 /* YGPCacheMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGPCacheMemory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,8 +189,12 @@
 		184482561C326A1E001E8F30 /* YGPCache */ = {
 			isa = PBXGroup;
 			children = (
-				184482571C326A1E001E8F30 /* YGPCache.h */,
-				184482581C326A1E001E8F30 /* YGPCache.m */,
+				18D616531C45EEDB00F1CF42 /* YGPCache.h */,
+				18D616541C45EEDB00F1CF42 /* YGPCache.m */,
+				18D616551C45EEDB00F1CF42 /* YGPCacheDisk.h */,
+				18D616561C45EEDB00F1CF42 /* YGPCacheDisk.m */,
+				18D616571C45EEDB00F1CF42 /* YGPCacheMemory.h */,
+				18D616581C45EEDB00F1CF42 /* YGPCacheMemory.m */,
 			);
 			path = YGPCache;
 			sourceTree = "<group>";
@@ -320,11 +330,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				184482351C322D38001E8F30 /* YGPHTTPRequest.m in Sources */,
+				18D616591C45EEDB00F1CF42 /* YGPCache.m in Sources */,
+				18D6165B1C45EEDB00F1CF42 /* YGPCacheMemory.m in Sources */,
 				184482021C322D27001E8F30 /* ViewController.m in Sources */,
 				1844823A1C322D86001E8F30 /* YGPModel.m in Sources */,
 				184482361C322D38001E8F30 /* YGPURLSessionManager.m in Sources */,
-				184482591C326A1E001E8F30 /* YGPCache.m in Sources */,
 				184482551C326A11001E8F30 /* UIImageView+YGPWebImage.m in Sources */,
+				18D6165A1C45EEDB00F1CF42 /* YGPCacheDisk.m in Sources */,
 				184481FF1C322D27001E8F30 /* AppDelegate.m in Sources */,
 				184481FC1C322D27001E8F30 /* main.m in Sources */,
 			);
