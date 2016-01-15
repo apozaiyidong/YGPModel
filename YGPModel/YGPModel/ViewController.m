@@ -11,7 +11,10 @@
 #import "YGPCache/YGPCache.h"
 
 @interface ViewController ()
+{
 
+    __block NSString *aa;
+}
 @end
 
 @implementation ViewController
@@ -19,20 +22,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    NSDictionary *dict = @{@"cc":@(11),@"pp":[NSValue valueWithCGPoint:CGPointMake(20, 20)],@"arr":@[@"test"],@"date":@"2015-12-30 12:06:47 GMT+08:00",@"picSmall":@"test"};
-//    
-//    TestModel * test = [[TestModel alloc]initWithDictionary:dict];
-//    NSLog(@"data--- %@ %@",test.arr,NSStringFromCGPoint(test.pp));
+    NSMutableDictionary *dict = [NSMutableDictionary new];
     
-    for (int i = 0; i<36; i++) {
-        NSString *ac = [@(arc4random()%2000) stringValue];
-        [[YGPCache sharedCache]setObjectToMemory:ac forKey:[@(i) stringValue]];
-
-    }
+    
+    [dict setObject:@"aa" forKey:@"22"];
+    
+    NSString *caa = dict[@"22"];
+    caa = @"cc";
+    
+    NSLog(@"dict %@",dict);
+    
+    aa = @"";
+    [[YGPCache sharedCache]setObjectToMemory:@"aaa" forKey:@"1"];
+    [[YGPCache sharedCache] objectFormMemoryForKey:@"1" block:^(id object, NSString *key) {
+        aa = object;
+    }];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self
+                                   selector:@selector(aaa) userInfo:nil repeats:NO];
+    
+//    for (int i = 0; i<36; i++) {
+//        NSString *ac = [@(arc4random()%2000) stringValue];
+//        [[YGPCache sharedCache]setObjectToMemory:ac forKey:[@(i) stringValue]];
+//
+//    }
    
     
 }
+- (void)aaa{
+    NSLog(@"来了诶有");
+    [[YGPCache sharedCache]setObjectToMemory:@"22" forKey:@"1"];
 
+    NSLog(@"%@",aa);
+    [[YGPCache sharedCache] objectFormMemoryForKey:@"1" block:^(id object, NSString *key) {
+        NSLog(@"object %@",object);
+        NSLog(@"%@",aa);
+
+    }];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -10,7 +10,6 @@
 {
     @public
     NSString       *_key;
-    NSTimeInterval _accessedTime;
     NSUInteger     _accessedCount;//object access count
     BOOL           _isEvitable;
 }
@@ -27,9 +26,7 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
 {
     NSMutableDictionary *_objects;
     NSMutableDictionary *_cacheNode;
-    NSTimeInterval       _recentlyHandleTime;
-    NSUInteger           _minAccessedCount;
-    NSUInteger           _totalCount;
+    NSUInteger           _totalAccessed;
 }
 
 @property (nonatomic,strong) dispatch_queue_t memoryIoQueue;
@@ -55,8 +52,8 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
         
         _objects               = [[NSMutableDictionary alloc]init];
         _cacheNode             = [[NSMutableDictionary alloc]init];
-        _recentlyHandleTime    = [[NSDate date] timeIntervalSinceReferenceDate];
-        _minAccessedCount      = 1;
+        _totalAccessed         = 0;
+        
         _memoryCacheCountLimit = YGPCacheCacheMemoryObjLimit;
         _memoryIoQueue         = dispatch_queue_create(YGPCacheMemoryIOQueue, DISPATCH_QUEUE_SERIAL);
         
@@ -96,6 +93,7 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
         if (oldCacheNode) {
             [_objects   removeObjectForKey:key];
             [_cacheNode removeObjectForKey:key];
+            [self setTotalAccessed:key];
         }
         
         [self cacheObjectManager];
@@ -104,8 +102,6 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
         newCacheNode->_key = key;
         newCacheNode->_accessedCount ++;
         newCacheNode->_isEvitable = isEvitable;
-        
-        _minAccessedCount = newCacheNode->_accessedCount < _minAccessedCount ? newCacheNode->_accessedCount : _minAccessedCount;
         
         [_objects   setObject:object       forKey:key];
         [_cacheNode setObject:newCacheNode forKey:key];
@@ -128,6 +124,7 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
         cacheNodeObject->_accessedCount ++;
         [_cacheNode removeObjectForKey:key];
         [_cacheNode setObject:cacheNodeObject forKey:key];
+        _totalAccessed ++;
         
     });
     
@@ -140,7 +137,10 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
         
         [_objects      removeAllObjects];
         [_cacheNode    removeAllObjects];
+        _totalAccessed = 0;
+        
     });
+    
 }
 
 - (void)removeDataForKey:(NSString*)key{
@@ -148,6 +148,8 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
     if (![key length]) {return;}
     
     dispatch_async(_memoryIoQueue, ^{
+        
+        [self setTotalAccessed:key];
         
         [_objects   removeObjectForKey:key];
         [_cacheNode removeObjectForKey:key];
@@ -160,12 +162,18 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
     __block BOOL isContains = NO;
     
     dispatch_sync(_memoryIoQueue, ^{
-        if (_objects[key]) {
-            isContains = YES;
-        }
+        
+        if (_objects[key]) {isContains = YES;}
+        
     });
     
     return isContains;
+}
+
+- (void)setTotalAccessed:(NSString*)key{
+    
+    YGPMemoryCacheNode *cacheNode = _cacheNode[key];
+    _totalAccessed -=cacheNode->_accessedCount;
 }
 
 /*
@@ -173,24 +181,25 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
  */
 - (void)cacheObjectManager{
     
+    NSUInteger count = [_objects count];
+    
+    NSUInteger averageAccessed = _totalAccessed / count + 1;
     //移除近期不访问
-    if (_objects.count >= YGPCacheCacheMemoryObjLimit) {
+    if (count >= YGPCacheCacheMemoryObjLimit) {
         
         [_cacheNode enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             
             YGPMemoryCacheNode *cacheNode = obj;
             if (cacheNode) {
                 
-                if (cacheNode->_accessedCount <= _minAccessedCount && !cacheNode->_isEvitable) {
+                if (cacheNode->_accessedCount <= averageAccessed && !cacheNode->_isEvitable) {
 
                     [_objects   removeObjectForKey:key];
                     [_cacheNode removeObjectForKey:key];
                 }
             }
-            
         }];
     }
-
 }
 
 @end
