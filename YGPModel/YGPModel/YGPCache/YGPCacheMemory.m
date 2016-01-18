@@ -54,7 +54,7 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
         _cacheNode             = [[NSMutableDictionary alloc]init];
         _totalAccessed         = 0;
         
-        _memoryCacheCountLimit = YGPCacheCacheMemoryObjLimit;
+        _memoryCacheCostLimit = YGPCacheCacheMemoryObjLimit;
         _memoryIoQueue         = dispatch_queue_create(YGPCacheMemoryIOQueue, DISPATCH_QUEUE_SERIAL);
         
         [[NSNotificationCenter defaultCenter]addObserverForName:UIApplicationDidReceiveMemoryWarningNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * __unused note) {
@@ -75,13 +75,17 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
     return self;
 }
 
+- (void)setMemoryCacheCostLimit:(NSUInteger)memoryCacheCostLimit{
+    _memoryCacheCostLimit = memoryCacheCostLimit;
+}
 
 - (void)setObject:(id)object forKey:(NSString *)key{
     
-    [self setObject:object forKey:key isEvitable:NO];
+    [self setObject:object forKey:key isEvitable:NO costLimit:_memoryCacheCostLimit];
+    
 }
 
-- (void)setObject:(id)object forKey:(NSString *)key isEvitable:(BOOL)isEvitable{
+- (void)setObject:(id)object forKey:(NSString *)key isEvitable:(BOOL)isEvitable costLimit:(NSUInteger)costLimit{
     
     if (![key length] ||!object) {return;}
     
@@ -96,7 +100,7 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
             [self setTotalAccessed:key];
         }
         
-        [self cacheObjectManager];
+        [self cacheObjectManagerWithcostLimit:costLimit];
 
         newCacheNode = [YGPMemoryCacheNode new];
         newCacheNode->_key = key;
@@ -173,20 +177,23 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
 - (void)setTotalAccessed:(NSString*)key{
     
     YGPMemoryCacheNode *cacheNode = _cacheNode[key];
-    _totalAccessed -=cacheNode->_accessedCount;
+    if (cacheNode) {
+        _totalAccessed -=cacheNode->_accessedCount;
+    }
 }
 
 /*
  
  */
-- (void)cacheObjectManager{
+- (void)cacheObjectManagerWithcostLimit:(NSUInteger)costLimit{
     
     NSUInteger count = [_objects count];
     
-    NSUInteger averageAccessed = _totalAccessed / count + 1;
     //移除近期不访问
-    if (count >= YGPCacheCacheMemoryObjLimit) {
+    if (count >= costLimit) {
         
+        NSUInteger averageAccessed = _totalAccessed / count + 1;
+
         [_cacheNode enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             
             YGPMemoryCacheNode *cacheNode = obj;

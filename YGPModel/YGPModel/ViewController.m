@@ -38,14 +38,13 @@
         aa = object;
     }];
     
-    [NSTimer scheduledTimerWithTimeInterval:2 target:self
-                                   selector:@selector(aaa) userInfo:nil repeats:NO];
+   
     
-//    for (int i = 0; i<36; i++) {
-//        NSString *ac = [@(arc4random()%2000) stringValue];
-//        [[YGPCache sharedCache]setObjectToMemory:ac forKey:[@(i) stringValue]];
-//
-//    }
+    for (int i = 0; i<36; i++) {
+        NSString *ac = [@(arc4random()%2000) stringValue];
+        [[YGPCache sharedCache]setObjectToMemory:ac forKey:[@(i) stringValue]];
+        [self aaa];
+    }
    
     
 }
