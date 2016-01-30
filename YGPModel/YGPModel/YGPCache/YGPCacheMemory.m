@@ -124,11 +124,13 @@ static char       *const YGPCacheMemoryIOQueue          = "YGPCacheMemoryIOQueue
         
         cacheData = _objects[key];
         
-        YGPMemoryCacheNode *cacheNodeObject = _cacheNode[key];
-        cacheNodeObject->_accessedCount ++;
-        [_cacheNode removeObjectForKey:key];
-        [_cacheNode setObject:cacheNodeObject forKey:key];
-        _totalAccessed ++;
+        if (cacheData) {
+            YGPMemoryCacheNode *cacheNodeObject = _cacheNode[key];
+            cacheNodeObject->_accessedCount ++;
+            [_cacheNode removeObjectForKey:key];
+            [_cacheNode setObject:cacheNodeObject forKey:key];
+            _totalAccessed ++;
+        }
         
     });
     

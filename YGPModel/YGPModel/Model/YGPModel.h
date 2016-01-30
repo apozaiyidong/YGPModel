@@ -4,9 +4,9 @@
  
  将 NSDictionary 数据 Mapping 到 @property
  将 C 数据类型转换成 NSNumber
- 基础数据类型如果没有对应的值默认设置 0 
+ 基础数据类型如果没有对应的值默认设置 0
  
-*/
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -32,4 +32,6 @@
 
 @interface NSString (property_Attributes)
 - (BOOL)contains:(NSString*)att;
+- (BOOL)containsDataType:(NSString *)att;
+
 @end

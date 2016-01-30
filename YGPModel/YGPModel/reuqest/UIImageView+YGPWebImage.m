@@ -11,7 +11,7 @@
 
     [self YGP_setImageWithURL:url
              placeholderImage:nil
-               cacheOperation:YGPImageCacheMemory
+               cacheOperation:YGPImageCacheDisk
                      progress:nil complete:nil];
 }
 
@@ -20,7 +20,7 @@
 
     [self YGP_setImageWithURL:url
              placeholderImage:placeholder
-               cacheOperation:YGPImageCacheMemory
+               cacheOperation:YGPImageCacheDisk
                      progress:nil complete:nil];
     
 }
@@ -31,7 +31,7 @@
 
     [self YGP_setImageWithURL:url
              placeholderImage:placeholder
-               cacheOperation:YGPImageCacheMemory
+               cacheOperation:YGPImageCacheDisk
                      progress:nil complete:complete];
     
 }

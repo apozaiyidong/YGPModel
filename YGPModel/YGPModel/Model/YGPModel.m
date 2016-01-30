@@ -5,7 +5,7 @@
  将 NSDictionary 数据 Mapping 到 @property
  将 C 数据类型转换成 NSNumber
  
-*/
+ */
 
 #import "YGPModel.h"
 #import <UIKit/UIKit.h>
@@ -48,6 +48,10 @@
 
 - (void)mappingValueWithDictionary:(NSDictionary*)dictionary{
     
+    if (!propertyAttributes) {
+        propertyAttributes = [[NSMutableArray alloc]init];
+    }
+    
     [propertyAttributes removeAllObjects];
     
     NSArray *propertyNames = [NSArray arrayWithArray:[self propertyNames]];
@@ -64,11 +68,16 @@
 
 - (void)adpterValue:(id)value forKey:(NSString*)key propertyAtts:(NSString*)propertyAtts{
     
+    if ([self isNull:key]) {
+        return;
+    }
+    
     NSDictionary *underlyingDataTypes = [self underlyingDataTypes];
     Class cls = [self className_Property:propertyAtts underlyingTypes:underlyingDataTypes];
     
+    //the value is null
     if ([self isNull:value]){
-        NSLog(@"%@  没有设置 value",key);
+        
         if ([cls isSubclassOfClass:[NSNumber class]]) {
             [self setValue:@0 forKey:key];
         }else{
@@ -83,7 +92,27 @@
         return;
     }
     
-    if ([propertyAtts contains:@"NSURL"]) {
+    if ([NSStringFromClass(cls) contains:@"NSNumber"]) {
+        // B - >BOOL
+        // q - >NSInteger
+        // Q - >NSUInteger
+        // f - >float
+        // i - >int
+        // d - >CGFloat
+        
+        if ([propertyAtts containsDataType:@"q"] ||
+            [propertyAtts containsDataType:@"B"] ||
+            [propertyAtts containsDataType:@"i"]) {
+            [self setValue:@([value integerValue]) forKey:key];
+            return;
+        }else if ([propertyAtts containsDataType:@"f"] ||
+                  [propertyAtts containsDataType:@"d"]){
+            [self setValue:@([value floatValue]) forKey:key];
+            return;
+        }
+        
+    }//NSNumber
+    else if ([propertyAtts contains:@"NSURL"]) {
         if ([value isKindOfClass:[NSString class]]) {
             
             NSURL *url = [NSURL URLWithString:value];
@@ -122,8 +151,6 @@
         }
     }//NSDictionary
     
-    
-    [self setValue:nil forKey:key];
 }
 
 - (BOOL)isNull:(id)obj{
@@ -240,6 +267,7 @@
     return dateFormatter;
 }
 
+
 @end
 
 @implementation NSString(property_Attributes)
@@ -247,7 +275,20 @@
 - (BOOL)contains:(NSString*)att{
     
     NSRange range = [self rangeOfString:att options:NSCaseInsensitiveSearch];
-    return (range.length == att.length &&range.location !=NSNotFound);
+    return (range.length == att.length &&range.location != NSNotFound);
+}
+
+- (BOOL)containsDataType:(NSString *)att{
+    
+    
+    att = [att componentsSeparatedByString:@","][0];
+    if (att.length > 0) {
+        if ([self contains:att]) {
+            
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end
